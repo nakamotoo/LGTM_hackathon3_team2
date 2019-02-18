@@ -1,0 +1,3 @@
+rootProject.name = 'LGTM_hakathon3_team2'
+
+include ':app'
