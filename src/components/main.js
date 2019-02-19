@@ -20,7 +20,7 @@ class MainContainer extends Component {
   renderItem = selectedNabe => {
     return (
       <View style={styles.listContainer}>
-        <TouchableOpacity onPress={() => Actions.orderScreen(selectedNabe)}>
+        <TouchableOpacity onPress={() => Actions.orderScreen({ selectedNabe })}>
           <Image
             style={styles.imageStyle}
             source={{
@@ -124,6 +124,7 @@ const styles = StyleSheet.create({
     marginTop: 8
   },
   header: {
+    marginLeft: primary_side_margin,
     backgroundColor: headerBackGroundColor
   },
   headerText: {

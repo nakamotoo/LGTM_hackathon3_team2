@@ -62,7 +62,38 @@ const gekikara = {
   ]
 };
 
-const INITIAL_STATE = [hinabe, paitan, motsunabe, gekikara];
+const tonyu = {
+  nabeId: 5,
+  name: "豆乳鍋",
+  image: "http://www.kikkoman.co.jp/homecook/search/recipe/img/00004124.jpg",
+  food: [
+    { id: 1, name: "キャベツ", amount: 0.4 },
+    { id: 2, name: "にんじん", amount: 0.4 },
+    { id: 3, name: "豚肉", amount: 0.4 },
+    { id: 4, name: "df", amount: 0.4 },
+    { id: 5, name: "676e5", amount: 0.4 },
+    { id: 6, name: "ddd", amount: 0.4 },
+    { id: 7, name: "めん", amount: 0.4 }
+  ]
+};
+
+const kimuchi = {
+  nabeId: 6,
+  name: "キムチ",
+  image:
+    "https://obs.line-scdn.net/0hBhwKJ6u7HUdKMjEPmfdiED9vGygzUQdPIEoKfT9kF2k_XgpHIkgOeSR2GS8JXA1GLgYKcTIuMQIAcB1tMTwhdDo0GhEcQiMQHhIWYBhEQw9kBVp4ExFOIWsyQXZuBV0Rd1RadGwwQXVkR1sXcQZTJWYx",
+  food: [
+    { id: 1, name: "キャベツ", amount: 0.4 },
+    { id: 2, name: "にんじん", amount: 0.4 },
+    { id: 3, name: "豚肉", amount: 0.4 },
+    { id: 4, name: "df", amount: 0.4 },
+    { id: 5, name: "676e5", amount: 0.4 },
+    { id: 6, name: "ddd", amount: 0.4 },
+    { id: 7, name: "めん", amount: 0.4 }
+  ]
+};
+
+const INITIAL_STATE = [hinabe, paitan, motsunabe, gekikara, tonyu, kimuchi];
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
