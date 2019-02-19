@@ -11,7 +11,7 @@ class MainContainer extends Component {
         <Text style={styles.welcome}>Welcome to React Native!</Text>
         <Text style={styles.instructions}>To get started, edit App.js</Text>
         <Text style={styles.instructions} onPress={() => Actions.orderScreen()}>
-          {this.props.testId}
+          {"hoge"}
         </Text>
       </View>
     );
@@ -19,9 +19,7 @@ class MainContainer extends Component {
 }
 
 const mapStateToProps = state => {
-  return {
-    testId: state.test.id
-  };
+  return {};
 };
 
 export default connect(

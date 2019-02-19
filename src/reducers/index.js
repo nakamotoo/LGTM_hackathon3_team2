@@ -1,8 +1,8 @@
 import { combineReducers } from "redux";
-import TestReducer from "./TestReducer";
+import NabeReducer from "./NabeReducer";
 import MaterialReducer from "./MaterialReducer";
 
 export default combineReducers({
-  test: TestReducer,
+  nabe: NabeReducer,
   material: MaterialReducer
 });
