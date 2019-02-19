@@ -19,7 +19,7 @@ class MainContainer extends Component {
     return (
       <View style={styles.listContainer}>
         <Image
-          style={{ width: 50, height: 50 }}
+          style={styles.imageStyle}
           source={{
             uri: list.item.image
           }}
@@ -53,14 +53,6 @@ class MainContainer extends Component {
             numColumns={2}
             renderItem={this.renderItem}
           />
-          <Text style={styles.welcome}>Welcome to React Native!</Text>
-          <Text style={styles.instructions}>To get started, edit App.js</Text>
-          <Text
-            style={styles.instructions}
-            onPress={() => Actions.orderScreen()}
-          >
-            {this.props.testId}
-          </Text>
         </ScrollView>
       </View>
     );
@@ -113,5 +105,9 @@ const styles = StyleSheet.create({
     marginTop: primary_side_margin,
     alignItems: "flex-start",
     justifyContent: "center"
+  },
+  imageStyle: {
+    width: 100,
+    height: 100
   }
 });
