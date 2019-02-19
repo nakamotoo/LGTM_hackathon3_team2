@@ -8,7 +8,12 @@ class RouterComponent extends Component {
     return (
       <Router>
         <Scene key="root">
-          <Scene key="main" initial component={MainComponent} />
+          <Scene
+            key="main"
+            initial
+            component={MainComponent}
+            hideNavBar={true}
+          />
           <Scene key="orderScreen" component={OrderScreen} />
         </Scene>
       </Router>

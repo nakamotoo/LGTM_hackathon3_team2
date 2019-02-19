@@ -11,9 +11,11 @@ import {
   Image,
   TouchableOpacity
 } from "react-native";
+import { Header } from "react-native-elements";
 import { connect } from "react-redux";
 import * as actions from "../actions";
 import { Actions } from "react-native-router-flux";
+import SafeAreaView from "react-native-safe-area-view";
 
 class MainContainer extends Component {
   renderItem = list => {
@@ -27,32 +29,37 @@ class MainContainer extends Component {
             }}
           />
         </TouchableOpacity>
-        <Text style={styles.listTitle}>{list.item.name}</Text>
+        <View style={styles.textContainer}>
+          <Text style={styles.listTitle}>{list.item.name}</Text>
+        </View>
       </View>
     );
   };
   render() {
     const { nabe } = this.props;
     return (
-      <View style={styles.container}>
-        <ScrollView>
-          <FlatList
-            data={[
-              {
-                key: "a",
-                name: "四川風火鍋",
-                image: nabe.hinabe.image
-              },
-              { key: "b", name: "パイタン", image: nabe.paitan.image },
-              { key: "c", name: "もつ鍋", image: nabe.motsunabe.image },
-              { key: "d", name: "激辛", image: nabe.gekikara.image }
-            ]}
-            contentContainerStyle={styles.flatListContainer}
-            numColumns={2}
-            renderItem={this.renderItem}
-          />
-        </ScrollView>
-      </View>
+      <SafeAreaView style={styles.safeAreaStyle} forceInset={{ top: "always" }}>
+        <View style={styles.container}>
+          <Header />
+          <ScrollView>
+            <FlatList
+              data={[
+                {
+                  key: "a",
+                  name: "四川風火鍋",
+                  image: nabe.hinabe.image
+                },
+                { key: "b", name: "パイタン", image: nabe.paitan.image },
+                { key: "c", name: "もつ鍋", image: nabe.motsunabe.image },
+                { key: "d", name: "激辛", image: nabe.gekikara.image }
+              ]}
+              contentContainerStyle={styles.flatListContainer}
+              numColumns={2}
+              renderItem={this.renderItem}
+            />
+          </ScrollView>
+        </View>
+      </SafeAreaView>
     );
   }
 }
@@ -66,7 +73,7 @@ export default connect(
   actions
 )(MainContainer);
 
-const primary_side_margin = 4;
+const primary_side_margin = 8;
 const list_item_side_margin = 4;
 const list_width =
   (Dimensions.get("window").width -
@@ -80,15 +87,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "white"
   },
-  welcome: {
-    fontSize: 20,
-    textAlign: "center",
-    margin: 10
-  },
-  instructions: {
-    textAlign: "center",
-    color: "#333333",
-    marginBottom: 5
+  safeAreaStyle: {
+    flex: 1,
+    backgroundColor: "#F8F8F8"
   },
   listContainer: {
     // width: list_width,
@@ -101,7 +102,7 @@ const styles = StyleSheet.create({
     // backgroundColor: "red",
     marginLeft: primary_side_margin,
     marginRight: primary_side_margin,
-    marginTop: primary_side_margin,
+    marginTop: primary_side_margin + 4,
     alignItems: "flex-start",
     justifyContent: "center"
   },
@@ -114,5 +115,8 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: "500",
     color: "#49444f"
+  },
+  textContainer: {
+    marginTop: 8
   }
 });
