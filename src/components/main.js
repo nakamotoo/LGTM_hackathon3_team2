@@ -38,7 +38,7 @@ class MainContainer extends Component {
   header = () => {
     return (
       <View style={styles.header}>
-        <Text style={styles.headerText}>みんなで鍋パ！</Text>
+        <Text style={styles.partyTitle}>みんなで鍋パ！</Text>
       </View>
     );
   };
@@ -46,8 +46,8 @@ class MainContainer extends Component {
     const { nabe } = this.props;
     return (
       <SafeAreaView style={styles.safeAreaStyle} forceInset={{ top: "always" }}>
-        <View style={styles.container}>
-          <ScrollView>
+        <View style={styles.overlay}>
+          <ScrollView horizontal={true}>
             {this.header()}
             <FlatList
               data={nabe.map(item => {
@@ -59,7 +59,7 @@ class MainContainer extends Component {
                 };
               })}
               contentContainerStyle={styles.flatListContainer}
-              numColumns={2}
+              numColumns={10}
               renderItem={this.renderItem}
             />
           </ScrollView>
@@ -83,8 +83,8 @@ const list_item_side_margin = 4;
 const list_width =
   (Dimensions.get("window").width -
     (list_item_side_margin * 4 + primary_side_margin * 2)) /
-  2;
-const list_height = list_width * 1.2;
+  3;
+const list_height = list_width * 1;
 const headerBackGroundColor = "white";
 const styles = StyleSheet.create({
   container: {
@@ -103,8 +103,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginTop: 2,
-    marginLeft: 4,
-    marginRight: 4,
+    marginLeft: 8,
+    marginRight: 8,
     marginBottom: 16
   },
   flatListContainer: {
@@ -113,7 +113,13 @@ const styles = StyleSheet.create({
     marginRight: primary_side_margin,
     marginTop: primary_side_margin + 4,
     alignItems: "flex-start",
-    justifyContent: "center"
+    //justifyContent: "center"
+    flexDirection: "row"
+  },
+  partyTitle: {
+    fontSize: 20,
+    fontWeight: "400",
+    color: "#49444f"
   },
   imageStyle: {
     width: list_width,
@@ -121,7 +127,7 @@ const styles = StyleSheet.create({
     borderRadius: 8
   },
   listTitle: {
-    fontSize: 14,
+    fontSize: 16,
     fontWeight: "500",
     color: "#49444f"
   },
