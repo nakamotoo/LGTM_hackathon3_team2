@@ -8,7 +8,8 @@ import {
   FlatList,
   ScrollView,
   Dimensions,
-  Image
+  Image,
+  TouchableOpacity
 } from "react-native";
 import { connect } from "react-redux";
 import * as actions from "../actions";
@@ -18,36 +19,33 @@ class MainContainer extends Component {
   renderItem = list => {
     return (
       <View style={styles.listContainer}>
-        <Image
-          style={styles.imageStyle}
-          source={{
-            uri: list.item.image
-          }}
-        />
-        <Text>{list.item.name}</Text>
+        <TouchableOpacity onPress={() => Actions.orderScreen()}>
+          <Image
+            style={styles.imageStyle}
+            source={{
+              uri: list.item.image
+            }}
+          />
+        </TouchableOpacity>
+        <Text style={styles.listTitle}>{list.item.name}</Text>
       </View>
     );
   };
   render() {
-    const imageArray = {
-      hinabe:
-        "https://www.marukome.co.jp/files/recipe/3445/5ab85c53-66b4-4cb2-a24c-a4b91b85f192.jpg",
-      motsunabe:
-        "https://park.ajinomoto.co.jp/wp-content/uploads/2018/03/710648.jpeg",
-      misonabe:
-        "https://park.ajinomoto.co.jp/wp-content/uploads/2018/03/710396.jpeg",
-      gekikaranabe:
-        "https://trendy.nikkeibp.co.jp/article/pickup/20150219/1062785/thumb_400_07_px400.jpg"
-    };
+    const { nabe } = this.props;
     return (
       <View style={styles.container}>
         <ScrollView>
           <FlatList
             data={[
-              { key: "a", name: "四川風火鍋", image: imageArray.hinabe },
-              { key: "b", name: "もつ鍋", image: imageArray.motsunabe },
-              { key: "c", name: "味噌鍋", image: imageArray.misonabe },
-              { key: "d", name: "激辛", image: imageArray.gekikaranabe }
+              {
+                key: "a",
+                name: "四川風火鍋",
+                image: nabe.hinabe.image
+              },
+              { key: "b", name: "パイタン", image: nabe.paitan.image },
+              { key: "c", name: "もつ鍋", image: nabe.motsunabe.image },
+              { key: "d", name: "激辛", image: nabe.gekikara.image }
             ]}
             contentContainerStyle={styles.flatListContainer}
             numColumns={2}
@@ -60,7 +58,7 @@ class MainContainer extends Component {
 }
 
 const mapStateToProps = state => {
-  return {};
+  return { nabe: state.nabe };
 };
 
 export default connect(
@@ -70,12 +68,17 @@ export default connect(
 
 const primary_side_margin = 4;
 const list_item_side_margin = 4;
+const list_width =
+  (Dimensions.get("window").width -
+    (list_item_side_margin * 4 + primary_side_margin * 2)) /
+  2;
+const list_height = list_width * 1.2;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#F5FCFF"
+    backgroundColor: "white"
   },
   welcome: {
     fontSize: 20,
@@ -88,16 +91,14 @@ const styles = StyleSheet.create({
     marginBottom: 5
   },
   listContainer: {
-    width:
-      (Dimensions.get("window").width -
-        (list_item_side_margin * 4 + primary_side_margin * 2)) /
-      2,
+    // width: list_width,
+    // height: list_height,
     justifyContent: "center",
     alignItems: "center",
     margin: 4
   },
   flatListContainer: {
-    backgroundColor: "red",
+    // backgroundColor: "red",
     marginLeft: primary_side_margin,
     marginRight: primary_side_margin,
     marginTop: primary_side_margin,
@@ -105,7 +106,13 @@ const styles = StyleSheet.create({
     justifyContent: "center"
   },
   imageStyle: {
-    width: 100,
-    height: 100
+    width: list_width,
+    height: list_height,
+    borderRadius: 8
+  },
+  listTitle: {
+    fontSize: 14,
+    fontWeight: "500",
+    color: "#49444f"
   }
 });
