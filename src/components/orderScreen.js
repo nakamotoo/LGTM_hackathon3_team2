@@ -11,6 +11,7 @@ import {
 import { connect } from "react-redux";
 import * as actions from "../actions";
 import { Actions } from "react-native-router-flux";
+import Icon from "react-native-vector-icons/FontAwesome";
 
 class OrderScreen extends Component {
   state = { nabeId: this.props.selectedNabe.item.key };
@@ -28,7 +29,7 @@ class OrderScreen extends Component {
             style={{ width: 30, height: 30, borderRadius: 100, borderWidth: 1 }}
           >
             <TouchableOpacity>
-              <Text>+</Text>
+              <Icon name="plus" size={36} color={"red"} />
             </TouchableOpacity>
           </View>
           <Text style={styles.listItemAmount}>{item.amount}</Text>
