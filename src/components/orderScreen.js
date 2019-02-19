@@ -5,11 +5,15 @@ import * as actions from "../actions";
 import { Actions } from "react-native-router-flux";
 
 class OrderScreen extends Component {
+  componentWillMount() {
+    console.log(this.props.selectedNabe);
+  }
   renderItem = nabe => {
     return <Text>asdfads</Text>;
   };
 
   render() {
+    const { selectedNabe } = this.props;
     return (
       <View style={styles.container}>
         <ScrollView>
