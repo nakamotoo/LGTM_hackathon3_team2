@@ -1,27 +1,30 @@
 import React, { Component } from "react";
-import { Text, View, TextInput, StyleSheet } from "react-native";
+import { Text, View, TextInput, StyleSheet, ScrollView } from "react-native";
 import { connect } from "react-redux";
 import * as actions from "../actions";
 import { Actions } from "react-native-router-flux";
 
+renderItem = nabe => {
+  return <Text>asdfads</Text>;
+};
+
 class OrderScreen extends Component {
-  changeMessage = () => {
-    this.props.helloworld();
-  };
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>Welcome to Order Screen</Text>
-        <Text style={styles.instructions} onPress={() => this.changeMessage()}>
-          {"hitefa"}
-        </Text>
+        <ScrollView>
+          {this.props.nabe.map(item => this.renderItem(item))}
+        </ScrollView>
       </View>
     );
   }
 }
 
 const mapStateToProps = state => {
-  return {};
+  return {
+    nabe: state.nabe,
+    material: state.material
+  };
 };
 
 export default connect(

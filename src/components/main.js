@@ -37,16 +37,13 @@ class MainContainer extends Component {
       <View style={styles.container}>
         <ScrollView>
           <FlatList
-            data={[
-              {
-                key: "a",
-                name: "四川風火鍋",
-                image: nabe.hinabe.image
-              },
-              { key: "b", name: "パイタン", image: nabe.paitan.image },
-              { key: "c", name: "もつ鍋", image: nabe.motsunabe.image },
-              { key: "d", name: "激辛", image: nabe.gekikara.image }
-            ]}
+            data={nabe.map(item => {
+              return {
+                key: item.nabeId,
+                name: item.name,
+                image: item.image
+              };
+            })}
             contentContainerStyle={styles.flatListContainer}
             numColumns={2}
             renderItem={this.renderItem}
