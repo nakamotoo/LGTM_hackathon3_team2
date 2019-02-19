@@ -124,6 +124,7 @@ const styles = StyleSheet.create({
     marginTop: 8
   },
   header: {
+    marginLeft: primary_side_margin,
     backgroundColor: headerBackGroundColor
   },
   headerText: {
