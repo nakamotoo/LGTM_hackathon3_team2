@@ -6,13 +6,13 @@ const hinabe = {
   image:
     "https://www.syokuraku-web.com/wp-content/uploads/2017/10/20171020-hinaberamen01.jpg",
   food: [
-    { id: 1, name: "キャベツ", value: 100 },
-    { id: 2, name: "にんじん", value: 120 },
-    { id: 3, name: "豚肉", value: 100 },
-    { id: 4, name: "df", value: 100 },
-    { id: 5, name: "676e5", value: 100 },
-    { id: 6, name: "ddd", value: 100 },
-    { id: 7, name: "めん", value: 100 }
+    { id: 1, name: "キャベツ", amount: 0.4 },
+    { id: 2, name: "にんじん", amount: 0.4 },
+    { id: 3, name: "豚肉", amount: 0.4 },
+    { id: 4, name: "df", amount: 0.4 },
+    { id: 5, name: "676e5", amount: 0.4 },
+    { id: 6, name: "ddd", amount: 0.4 },
+    { id: 7, name: "めん", amount: 0.4 }
   ]
 };
 
@@ -22,13 +22,13 @@ const paitan = {
   image:
     "https://www.syokuraku-web.com/wp-content/uploads/2017/10/20171020-hinaberamen01.jpg",
   food: [
-    { id: 1, name: "キャベツ", value: 100 },
-    { id: 2, name: "にんじん", value: 120 },
-    { id: 3, name: "豚肉", value: 100 },
-    { id: 4, name: "df", value: 100 },
-    { id: 5, name: "676e5", value: 100 },
-    { id: 6, name: "ddd", value: 100 },
-    { id: 7, name: "めん", value: 100 }
+    { id: 1, name: "キャベツ", amount: 0.4 },
+    { id: 2, name: "にんじん", amount: 0.4 },
+    { id: 3, name: "豚肉", amount: 0.4 },
+    { id: 4, name: "df", amount: 0.4 },
+    { id: 5, name: "676e5", amount: 0.4 },
+    { id: 6, name: "ddd", amount: 0.4 },
+    { id: 7, name: "めん", amount: 0.4 }
   ]
 };
 
