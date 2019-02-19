@@ -1,16 +1,18 @@
 import React, { Component } from "react";
-import { Text, View, TextInput, StyleSheet, Platform } from "react-native";
+import { Text, View, TextInput, StyleSheet } from "react-native";
 import { connect } from "react-redux";
 import * as actions from "../actions";
 import { Actions } from "react-native-router-flux";
 
-class MainContainer extends Component {
+class OrderScreen extends Component {
+  changeMessage = () => {
+    this.props.helloworld();
+  };
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>Welcome to React Native!</Text>
-        <Text style={styles.instructions}>To get started, edit App.js</Text>
-        <Text style={styles.instructions} onPress={() => Actions.orderScreen()}>
+        <Text style={styles.welcome}>Welcome to Order Screen</Text>
+        <Text style={styles.instructions} onPress={() => this.changeMessage()}>
           {this.props.testId}
         </Text>
       </View>
@@ -27,7 +29,7 @@ const mapStateToProps = state => {
 export default connect(
   mapStateToProps,
   actions
-)(MainContainer);
+)(OrderScreen);
 
 const styles = StyleSheet.create({
   container: {

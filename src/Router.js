@@ -1,13 +1,15 @@
 import React, { Component } from "react";
 import { Scene, Router } from "react-native-router-flux";
 import MainComponent from "./components/main";
+import OrderScreen from "./components/orderScreen";
 
 class RouterComponent extends Component {
   render() {
     return (
       <Router>
         <Scene key="root">
-          <Scene key="pageA" initial component={MainComponent} />
+          <Scene key="main" initial component={MainComponent} />
+          <Scene key="orderScreen" component={OrderScreen} />
         </Scene>
       </Router>
     );
