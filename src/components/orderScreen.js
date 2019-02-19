@@ -13,7 +13,7 @@ class OrderScreen extends Component {
     return (
       <View style={styles.container}>
         <ScrollView>
-          // {this.props.nabe.map(item => this.renderItem(item))}
+          {this.props.nabe.map(item => this.renderItem(item))}
         </ScrollView>
       </View>
     );
