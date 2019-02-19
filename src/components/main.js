@@ -1,25 +1,64 @@
 import React, { Component } from "react";
-import { Text, View, TextInput, StyleSheet, Platform } from "react-native";
+import {
+  Text,
+  View,
+  TextInput,
+  StyleSheet,
+  Platform,
+  FlatList,
+  ScrollView,
+  Dimensions,
+  Image,
+  TouchableOpacity
+} from "react-native";
 import { connect } from "react-redux";
 import * as actions from "../actions";
 import { Actions } from "react-native-router-flux";
 
 class MainContainer extends Component {
+  renderItem = list => {
+    return (
+      <View style={styles.listContainer}>
+        <TouchableOpacity onPress={() => Actions.orderScreen()}>
+          <Image
+            style={styles.imageStyle}
+            source={{
+              uri: list.item.image
+            }}
+          />
+        </TouchableOpacity>
+        <Text style={styles.listTitle}>{list.item.name}</Text>
+      </View>
+    );
+  };
   render() {
+    const { nabe } = this.props;
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>Welcome to React Native!</Text>
-        <Text style={styles.instructions}>To get started, edit App.js</Text>
-        <Text style={styles.instructions} onPress={() => Actions.orderScreen()}>
-          {"hoge"}
-        </Text>
+        <ScrollView>
+          <FlatList
+            data={[
+              {
+                key: "a",
+                name: "四川風火鍋",
+                image: nabe.hinabe.image
+              },
+              { key: "b", name: "パイタン", image: nabe.paitan.image },
+              { key: "c", name: "もつ鍋", image: nabe.motsunabe.image },
+              { key: "d", name: "激辛", image: nabe.gekikara.image }
+            ]}
+            contentContainerStyle={styles.flatListContainer}
+            numColumns={2}
+            renderItem={this.renderItem}
+          />
+        </ScrollView>
       </View>
     );
   }
 }
 
 const mapStateToProps = state => {
-  return {};
+  return { nabe: state.nabe };
 };
 
 export default connect(
@@ -27,12 +66,19 @@ export default connect(
   actions
 )(MainContainer);
 
+const primary_side_margin = 4;
+const list_item_side_margin = 4;
+const list_width =
+  (Dimensions.get("window").width -
+    (list_item_side_margin * 4 + primary_side_margin * 2)) /
+  2;
+const list_height = list_width * 1.2;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#F5FCFF"
+    backgroundColor: "white"
   },
   welcome: {
     fontSize: 20,
@@ -43,5 +89,30 @@ const styles = StyleSheet.create({
     textAlign: "center",
     color: "#333333",
     marginBottom: 5
+  },
+  listContainer: {
+    // width: list_width,
+    // height: list_height,
+    justifyContent: "center",
+    alignItems: "center",
+    margin: 4
+  },
+  flatListContainer: {
+    // backgroundColor: "red",
+    marginLeft: primary_side_margin,
+    marginRight: primary_side_margin,
+    marginTop: primary_side_margin,
+    alignItems: "flex-start",
+    justifyContent: "center"
+  },
+  imageStyle: {
+    width: list_width,
+    height: list_height,
+    borderRadius: 8
+  },
+  listTitle: {
+    fontSize: 14,
+    fontWeight: "500",
+    color: "#49444f"
   }
 });
