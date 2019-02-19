@@ -30,6 +30,7 @@ class MainContainer extends Component {
         </TouchableOpacity>
         <View style={styles.textContainer}>
           <Text style={styles.listTitle}>{selectedNabe.item.name}</Text>
+          <Text style={styles.listInfo}>{selectedNabe.item.price}</Text>
         </View>
       </View>
     );
@@ -37,7 +38,7 @@ class MainContainer extends Component {
   header = () => {
     return (
       <View style={styles.header}>
-        <Text style={styles.headerText}>みんなで鍋パーティ</Text>
+        <Text style={styles.headerText}>みんなで鍋パ！</Text>
       </View>
     );
   };
@@ -53,7 +54,8 @@ class MainContainer extends Component {
                 return {
                   key: item.nabeId,
                   name: item.name,
-                  image: item.image
+                  image: item.image,
+                  price: item.price
                 };
               })}
               contentContainerStyle={styles.flatListContainer}
@@ -100,7 +102,10 @@ const styles = StyleSheet.create({
     // height: list_height,
     justifyContent: "center",
     alignItems: "center",
-    margin: 4
+    marginTop: 2,
+    marginLeft: 4,
+    marginRight: 4,
+    marginBottom: 16
   },
   flatListContainer: {
     // backgroundColor: "red",
@@ -117,6 +122,11 @@ const styles = StyleSheet.create({
   },
   listTitle: {
     fontSize: 14,
+    fontWeight: "500",
+    color: "#49444f"
+  },
+  listInfo: {
+    fontSize: 10,
     fontWeight: "500",
     color: "#49444f"
   },
