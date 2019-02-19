@@ -4,11 +4,11 @@ import { connect } from "react-redux";
 import * as actions from "../actions";
 import { Actions } from "react-native-router-flux";
 
-renderItem = nabe => {
-  return <Text>asdfads</Text>;
-};
-
 class OrderScreen extends Component {
+  renderItem = nabe => {
+    return <Text>asdfads</Text>;
+  };
+
   render() {
     return (
       <View style={styles.container}>
