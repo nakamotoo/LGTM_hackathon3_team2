@@ -5,7 +5,8 @@ import {
   TextInput,
   StyleSheet,
   ScrollView,
-  Dimensions
+  Dimensions,
+  TouchableOpacity
 } from "react-native";
 import { connect } from "react-redux";
 import * as actions from "../actions";
@@ -18,7 +19,23 @@ class OrderScreen extends Component {
     return (
       <View style={styles.listItemContainer} key={item.id}>
         <Text style={styles.listItemName}>{item.name}</Text>
-        <Text style={styles.listItemAmount}>{item.amount}</Text>
+        <View
+          style={{
+            flexDirection: "row"
+          }}
+        >
+          <View
+            style={{ width: 30, height: 30, borderRadius: 100, borderWidth: 1 }}
+          >
+            <TouchableOpacity>
+              <Text>+</Text>
+            </TouchableOpacity>
+          </View>
+          <Text style={styles.listItemAmount}>{item.amount}</Text>
+          <View
+            style={{ width: 30, height: 30, borderRadius: 100, borderWidth: 1 }}
+          />
+        </View>
       </View>
     );
   };
