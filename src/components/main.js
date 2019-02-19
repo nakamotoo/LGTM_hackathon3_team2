@@ -60,9 +60,7 @@ class MainContainer extends Component {
 }
 
 const mapStateToProps = state => {
-  return {
-    testId: state.test.id
-  };
+  return {};
 };
 
 export default connect(

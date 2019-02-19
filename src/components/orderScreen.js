@@ -13,7 +13,7 @@ class OrderScreen extends Component {
       <View style={styles.container}>
         <Text style={styles.welcome}>Welcome to Order Screen</Text>
         <Text style={styles.instructions} onPress={() => this.changeMessage()}>
-          {this.props.testId}
+          {"hitefa"}
         </Text>
       </View>
     );
@@ -21,9 +21,7 @@ class OrderScreen extends Component {
 }
 
 const mapStateToProps = state => {
-  return {
-    testId: state.test.id
-  };
+  return {};
 };
 
 export default connect(
