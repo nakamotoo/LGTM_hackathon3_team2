@@ -6,7 +6,8 @@ import {
   StyleSheet,
   ScrollView,
   Dimensions,
-  TouchableOpacity
+  TouchableOpacity,
+  DatePickerIOS
 } from "react-native";
 import { connect } from "react-redux";
 import * as actions from "../actions";
@@ -14,28 +15,80 @@ import { Actions } from "react-native-router-flux";
 import Icon from "react-native-vector-icons/FontAwesome";
 
 class OrderScreen extends Component {
-  state = { nabeId: this.props.selectedNabe.item.key };
+  state = {
+    nabeId: this.props.selectedNabe.item.key,
+    peopleNum: 2,
+    finalAmount: [],
+    chosenDate: new Date()
+  };
+
+  componentWillMount() {
+    const { nabe, selectedNabe } = this.props;
+    const itemNumbers = nabe[selectedNabe.item.key - 1].food.length;
+    let tmpArray = [];
+    for (var i = 0; i < itemNumbers; i++) {
+      tmpArray.push(nabe[selectedNabe.item.key - 1].food[i]);
+    }
+    this.setState({ finalAmount: tmpArray });
+  }
+
+  setDate = newDate => {
+    this.setState({ chosenDate: newDate });
+  };
+
+  renderPeopleNum = () => {
+    const { peopleNum } = this.state;
+
+    return (
+      <View style={styles.listItemContainer}>
+        <View style={styles.container}>
+          <DatePickerIOS
+            date={this.state.chosenDate}
+            onDateChange={this.setDate}
+          />
+        </View>
+        <Text style={styles.listItemName}>{"人数"}</Text>
+        <View style={styles.listItemWrapper}>
+          <View style={styles.digitButton}>
+            <TouchableOpacity
+              onPress={() =>
+                peopleNum > 1 && this.setState({ peopleNum: peopleNum - 1 })
+              }
+            >
+              <Icon name="minus" size={12} color={"red"} />
+            </TouchableOpacity>
+          </View>
+          <Text style={styles.listItemAmount}>{String(peopleNum)}</Text>
+          <View style={styles.digitButton}>
+            <TouchableOpacity
+              onPress={() => this.setState({ peopleNum: peopleNum + 1 })}
+            >
+              <Icon name="plus" size={12} color={"red"} />
+            </TouchableOpacity>
+          </View>
+        </View>
+      </View>
+    );
+  };
 
   renderItem = item => {
+    const { peopleNum } = this.state;
+    const integer = Math.ceil(item.amount * peopleNum);
     return (
       <View style={styles.listItemContainer} key={item.id}>
         <Text style={styles.listItemName}>{item.name}</Text>
-        <View
-          style={{
-            flexDirection: "row"
-          }}
-        >
-          <View
-            style={{ width: 30, height: 30, borderRadius: 100, borderWidth: 1 }}
-          >
+        <View style={styles.listItemWrapper}>
+          <View style={styles.digitButton}>
             <TouchableOpacity>
-              <Icon name="plus" size={36} color={"red"} />
+              <Icon name="minus" size={12} color={"red"} />
             </TouchableOpacity>
           </View>
-          <Text style={styles.listItemAmount}>{item.amount}</Text>
-          <View
-            style={{ width: 30, height: 30, borderRadius: 100, borderWidth: 1 }}
-          />
+          <Text style={styles.listItemAmount}>{String(integer)}</Text>
+          <View style={styles.digitButton}>
+            <TouchableOpacity>
+              <Icon name="plus" size={12} color={"red"} />
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
     );
@@ -46,6 +99,7 @@ class OrderScreen extends Component {
     return (
       <View style={styles.container}>
         <ScrollView style={{ flex: 1 }}>
+          {this.renderPeopleNum()}
           {this.props.nabe[nabeId - 1].food.map(item => this.renderItem(item))}
         </ScrollView>
       </View>
@@ -86,5 +140,22 @@ const styles = StyleSheet.create({
     paddingRight: list_item_side_margin
   },
   listItemName: {},
-  listItemAmount: {}
+  listItemAmount: { width: 45, textAlign: "center" },
+  listItemWrapper: {
+    flexDirection: "row"
+  },
+  digitButton: {
+    width: 24,
+    height: 24,
+    borderRadius: 100,
+    borderWidth: 0.7,
+    borderColor: "red",
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#fff"
+  },
+  container: {
+    flex: 1,
+    justifyContent: "center"
+  }
 });
