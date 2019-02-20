@@ -30,3 +30,19 @@ export const decreasePeopleNum = () => {
     type: actionType.DECREASE_PEOPLE_NUM
   };
 };
+
+export const increaseFoodNum = id => {
+  console.log(id);
+  return {
+    type: actionType.INCREASE_FOOD_NUM,
+    id
+  };
+};
+
+export const decreaseFoodNum = id => {
+  console.log(id);
+  return {
+    type: actionType.DECREASE_FOOD_NUM,
+    id
+  };
+};

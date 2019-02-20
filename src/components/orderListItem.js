@@ -34,11 +34,7 @@ class OrderListItem extends Component {
             <TouchableOpacity
               onPress={() => {
                 integer > 0 && this.setState({ changeNum: changeNum - 1 });
-                this.props.changeFoodNum(
-                  this.state.changeNum,
-                  item.id,
-                  peopleNum
-                );
+                this.props.decreaseFoodNum(item.id);
               }}
             >
               <Icon name="minus" size={12} color={"red"} />
@@ -47,7 +43,10 @@ class OrderListItem extends Component {
           <Text style={styles.listItemAmount}>{String(integer)}</Text>
           <View style={styles.digitButton}>
             <TouchableOpacity
-              onPress={() => this.setState({ changeNum: changeNum + 1 })}
+              onPress={() => {
+                this.setState({ changeNum: changeNum + 1 });
+                this.props.increaseFoodNum(item.id);
+              }}
             >
               <Icon name="plus" size={12} color={"red"} />
             </TouchableOpacity>
