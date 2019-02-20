@@ -17,6 +17,7 @@ import DatePicker from "react-native-datepicker";
 import OrderListItem from "./orderListItem";
 import SafeAreaView from "react-native-safe-area-view";
 import Modal from "react-native-modal";
+import ModalDone from "./orderDone.js";
 
 class OrderScreen extends Component {
   state = {
@@ -24,7 +25,8 @@ class OrderScreen extends Component {
     nabeId: this.props.selectedNabe.item.key,
     peopleNum: 2,
     date: null,
-    isVisible: false
+    isVisible: false,
+    isModalVisible: false
   };
 
   componentWillMount() {
@@ -144,16 +146,6 @@ class OrderScreen extends Component {
           <Text style={styles.orderText}>注文へ</Text>
           <Text style={styles.orderPrice}>¥ {this.priceCalculation()}</Text>
         </TouchableOpacity>
-        <Modal isVisible={true} style={styles.bottomModal}>
-          <View
-            style={{
-              height: 100,
-              backgroundColor: "#ffffff"
-            }}
-          >
-            <Text>注文</Text>
-          </View>
-        </Modal>
       </View>
     );
   };
@@ -165,7 +157,10 @@ class OrderScreen extends Component {
         <View style={styles.container}>
           {this.renderHeader()}
           <ScrollView style={styles.main}>
-            <Text style={styles.nabeName}>{nabeInfo.name}セット</Text>
+            <Text style={styles.nabeName}>
+              {nabeInfo.name}
+              セット
+            </Text>
             {this.renderPeopleNum()}
             <View style={styles.listItemContainer}>
               <Text style={styles.listItemName}>{"食材"}</Text>
@@ -177,6 +172,7 @@ class OrderScreen extends Component {
             </View>
           </ScrollView>
           {this.renderFooter()}
+          <ModalDone isModalVisible={this.state.isVisible} />
         </View>
       </SafeAreaView>
     );

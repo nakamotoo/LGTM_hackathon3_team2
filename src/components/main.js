@@ -15,10 +15,8 @@ import { connect } from "react-redux";
 import * as actions from "../actions";
 import { Actions } from "react-native-router-flux";
 import SafeAreaView from "react-native-safe-area-view";
-import Modal from "./orderDone.js";
 
 class MainContainer extends Component {
-  state = { isModalVisible: false };
   renderItem = selectedNabe => {
     return (
       <View style={styles.listContainer}>
@@ -55,13 +53,6 @@ class MainContainer extends Component {
     return (
       <SafeAreaView style={styles.safeAreaStyle} forceInset={{ top: "always" }}>
         <View style={styles.container}>
-          <TouchableOpacity
-            onPress={() => {
-              this.setState({ isModalVisible: true });
-            }}
-            style={{ width: 200, height: 50, backgroundColor: "orange" }}
-          />
-          <Modal isModalVisible={this.state.isModalVisible} />
           <ScrollView>
             <View style={{ flexDirection: "row", flex: 1 }}>
               {this.header("鍋")}

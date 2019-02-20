@@ -6,34 +6,36 @@ export default class ModalTester extends Component {
   render() {
     const { isModalVisible } = this.props;
     return (
-      <View style={{ height: 300 }}>
-        <Modal isVisible={isModalVisible} style={{ height: 300 }}>
-          <View style={styles.container}>
-            <Text style={styles.title}>注文が完了しました！</Text>
-            <View style={styles.border} />
-            <Text>注文内容を友達に共有する!</Text>
-            <TouchableOpacity style={styles.buttonContainer}>
-              <Text style={styles.buttonText}>共有リンクをコピー</Text>
-            </TouchableOpacity>
-          </View>
-        </Modal>
-      </View>
+      <Modal isVisible={isModalVisible}>
+        <View style={styles.container}>
+          <Text style={styles.title}>注文が完了しました！</Text>
+          <View style={styles.border} />
+          <Text style={styles.shareText}>注文内容を友達に共有しましょう</Text>
+          <TouchableOpacity style={styles.buttonContainer}>
+            <Text style={styles.buttonText}>共有リンクをコピー</Text>
+          </TouchableOpacity>
+        </View>
+      </Modal>
     );
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    height: 250,
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "white",
-    marginTop: 12
+    marginTop: 12,
+    borderRadius: 6
   },
   buttonContainer: {
     backgroundColor: "orange",
     width: 216,
-    height: 40
+    height: 40,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 16
   },
   buttonText: {
     color: "white",
@@ -49,6 +51,11 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     width: 276,
     marginTop: 6,
+    marginBottom: 24,
     backgroundColor: "orange"
+  },
+  shareText: {
+    fontWeight: "500",
+    fontSize: 18
   }
 });
