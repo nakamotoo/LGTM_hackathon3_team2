@@ -30,7 +30,7 @@ class MainContainer extends Component {
         </TouchableOpacity>
         <View style={styles.textContainer}>
           <Text style={styles.listTitle}>{selectedNabe.item.name}</Text>
-          <Text style={styles.listInfo}>{selectedNabe.item.price}</Text>
+          <Text style={styles.te}>{selectedNabe.item.price}</Text>
         </View>
       </View>
     );
@@ -230,10 +230,14 @@ const styles = StyleSheet.create({
   listInfo: {
     fontSize: 10,
     fontWeight: "500",
-    color: "#49444f"
+    color: "#49444f",
+    justifyContent: "center",
+    alignItems: "center"
   },
   textContainer: {
-    marginTop: 8
+    marginTop: 8,
+    justifyContent: "center",
+    alignItems: "center"
   },
   header: {
     marginLeft: primary_side_margin + 8,
