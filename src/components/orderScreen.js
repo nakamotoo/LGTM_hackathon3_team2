@@ -17,16 +17,31 @@ import OrderListItem from "./orderListItem";
 
 class OrderScreen extends Component {
   state = {
+    nabeInfo: null,
     nabeId: this.props.selectedNabe.item.key,
     peopleNum: 2,
     finalAmount: [],
     date: null
   };
 
-  componentWillMount() {}
+  componentWillMount() {
+    const { nabeId, peopleNum } = this.state;
+    this.setState({ nabeInfo: this.props.nabe[nabeId - 1] });
+    const nabeInfo = this.props.nabe[nabeId - 1];
+    this.props.selectNabe(nabeId, peopleNum, nabeInfo, this.props.material);
+  }
 
   setDate = newDate => {
     this.setState({ chosenDate: newDate });
+  };
+
+  priceCalculation = () => {
+    const { order } = this.props;
+    let price = 0;
+    order.food.forEach(f => {
+      price += (Math.ceil(f.amount * order.people) + f.changeNum) * f.priceper1;
+    });
+    return price;
   };
 
   renderPeopleNum = () => {
@@ -38,9 +53,10 @@ class OrderScreen extends Component {
         <View style={styles.listItemWrapper}>
           <View style={styles.digitButton}>
             <TouchableOpacity
-              onPress={() =>
-                peopleNum > 1 && this.setState({ peopleNum: peopleNum - 1 })
-              }
+              onPress={() => {
+                peopleNum > 1 && this.setState({ peopleNum: peopleNum - 1 });
+                this.props.decreasePeopleNum();
+              }}
             >
               <Icon name="minus" size={12} color={"red"} />
             </TouchableOpacity>
@@ -48,7 +64,10 @@ class OrderScreen extends Component {
           <Text style={styles.listItemAmount}>{String(peopleNum)}</Text>
           <View style={styles.digitButton}>
             <TouchableOpacity
-              onPress={() => this.setState({ peopleNum: peopleNum + 1 })}
+              onPress={() => {
+                this.setState({ peopleNum: peopleNum + 1 });
+                this.props.increasePeopleNum();
+              }}
             >
               <Icon name="plus" size={12} color={"red"} />
             </TouchableOpacity>
@@ -95,15 +114,24 @@ class OrderScreen extends Component {
     return <OrderListItem item={item} peopleNum={peopleNum} key={item.id} />;
   };
 
+  renderFooter = () => {
+    return (
+      <View style={styles.footer}>
+        <Text>合計金額(税込) : {this.priceCalculation()}</Text>
+      </View>
+    );
+  };
+
   render() {
-    const { nabeId } = this.state;
+    const { nabeId, nabeInfo } = this.state;
     return (
       <View style={styles.container}>
-        <ScrollView style={{ flex: 1 }}>
+        <ScrollView style={styles.main}>
           {this.renderPeopleNum()}
           {this.renderDate()}
-          {this.props.nabe[nabeId - 1].food.map(item => this.renderItem(item))}
+          {nabeInfo.food.map(item => this.renderItem(item))}
         </ScrollView>
+        {this.renderFooter()}
       </View>
     );
   }
@@ -112,7 +140,8 @@ class OrderScreen extends Component {
 const mapStateToProps = state => {
   return {
     nabe: state.nabe,
-    material: state.material
+    material: state.material,
+    order: state.order
   };
 };
 
@@ -128,6 +157,14 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#FFFFFF"
+  },
+  main: {
+    flex: 0.85
+  },
+  footer: {
+    flex: 0.15,
+    borderTopWidth: 1,
+    width: Dimensions.get("window").width
   },
   listItemContainer: {
     width: Dimensions.get("window").width,
