@@ -12,11 +12,10 @@ const hinabe = {
     { id: 4, name: "ジャガイモ", amount: 0.5 },
     { id: 5, name: "豆板醤", amount: 0.01 },
     { id: 6, name: "えのき", amount: 0.5 },
-    { id: 7, name: "ラーメン", amount: 0.5 }
+    { id: 7, name: "ラーメン", amount: 0.5 },
     { id: 8, name: "豆腐", amount: 0.3 }
-
   ],
-  price:"600円/人"
+  price: "600円/人"
 };
 
 const paitan = {
@@ -24,16 +23,16 @@ const paitan = {
   name: "鶏白湯",
   image: "https://park.ajinomoto.co.jp/wp-content/uploads/2018/03/708441.jpeg",
   food: [
-    { id: 1, name: "手羽元", amount: 2  },
+    { id: 1, name: "手羽元", amount: 2 },
     { id: 2, name: "にんじん", amount: 0.5 },
-    { id: 3, name: "ネギ", amount: 0.5},
+    { id: 3, name: "ネギ", amount: 0.5 },
     { id: 4, name: "しめじ", amount: 0.3 },
     { id: 5, name: "白菜(1/2カット)", amount: 0.4 },
     { id: 6, name: "豆腐", amount: 0.25 },
     { id: 7, name: "ラーメン", amount: 0.5 },
     { id: 8, name: "鳥白湯の素", amount: 0.125 }
   ],
-  price:"400円/人"
+  price: "400円/人"
 };
 
 const motsunabe = {
@@ -49,7 +48,7 @@ const motsunabe = {
     { id: 6, name: "ddd", amount: 2.4 },
     { id: 7, name: "めん", amount: 0.3 }
   ],
-  price:"600円/人"
+  price: "600円/人"
 };
 
 const gekikara = {
@@ -66,7 +65,7 @@ const gekikara = {
     { id: 6, name: "ddd", amount: 2.4 },
     { id: 7, name: "めん", amount: 0.3 }
   ],
-  price:"500円/人"
+  price: "500円/人"
 };
 
 const tonyu = {
@@ -82,7 +81,7 @@ const tonyu = {
     { id: 6, name: "ddd", amount: 2.4 },
     { id: 7, name: "めん", amount: 0.3 }
   ],
-  price:"500円/人"
+  price: "500円/人"
 };
 
 const kimuchi = {
@@ -99,7 +98,7 @@ const kimuchi = {
     { id: 6, name: "ddd", amount: 2.4 },
     { id: 7, name: "めん", amount: 0.3 }
   ],
-  price:"400円/人"
+  price: "400円/人"
 };
 
 const INITIAL_STATE = [hinabe, paitan, motsunabe, gekikara, tonyu, kimuchi];
