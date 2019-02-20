@@ -11,7 +11,7 @@ const okonomiyaki = {
     { id: 6, name: "ddd", amount: 0.4 },
     { id: 7, name: "めん", amount: 0.4 }
   ],
-  price: "700円/人"
+  price: "250円/人"
 };
 
 const yasai = {
@@ -27,7 +27,7 @@ const yasai = {
     { id: 6, name: "ddd", amount: 0.4 },
     { id: 7, name: "めん", amount: 0.4 }
   ],
-  price: "600円/人"
+  price: "300円/人"
 };
 
 const cheeze = {
@@ -44,7 +44,7 @@ const cheeze = {
     { id: 6, name: "ddd", amount: 0.4 },
     { id: 7, name: "めん", amount: 0.4 }
   ],
-  price: "700円/人"
+  price: "300円/人"
 };
 
 const hiroshima = {
@@ -60,7 +60,7 @@ const hiroshima = {
     { id: 6, name: "ddd", amount: 0.4 },
     { id: 7, name: "めん", amount: 0.4 }
   ],
-  price: "600円/人"
+  price: "400円/人"
 };
 
 const INITIAL_STATE = [okonomiyaki, yasai, cheeze, hiroshima];
