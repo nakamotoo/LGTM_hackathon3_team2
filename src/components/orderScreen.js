@@ -15,6 +15,8 @@ import { Actions } from "react-native-router-flux";
 import Icon from "react-native-vector-icons/FontAwesome";
 import DatePicker from "react-native-datepicker";
 import OrderListItem from "./orderListItem";
+import SafeAreaView from "react-native-safe-area-view";
+import Modal from "react-native-modal";
 
 class OrderScreen extends Component {
   state = {
@@ -134,7 +136,7 @@ class OrderScreen extends Component {
       <View style={styles.footer}>
         <TouchableOpacity style={styles.footerContainer}>
           <Text style={styles.orderText}>注文へ</Text>
-          <Text style={styles.orderPrice}> ¥{this.priceCalculation()}</Text>
+          <Text style={styles.orderPrice}>¥ {this.priceCalculation()}</Text>
         </TouchableOpacity>
       </View>
     );
@@ -143,19 +145,25 @@ class OrderScreen extends Component {
   render() {
     const { nabeId, nabeInfo } = this.state;
     return (
-      <View style={styles.container}>
-        {this.renderHeader()}
-        <ScrollView style={styles.main}>
-          <Text style={styles.nabeName}>{nabeInfo.name}セット</Text>
-          {this.renderPeopleNum()}
-          <View style={styles.listItemContainer}>
-            <Text style={styles.listItemName}>{"食材"}</Text>
-          </View>
-          {nabeInfo.food.map(item => this.renderItem(item))}
-          {this.renderDate()}
-        </ScrollView>
-        {this.renderFooter()}
-      </View>
+      <SafeAreaView style={styles.safeAreaStyle} forceInset={{ top: "never" }}>
+        <View style={styles.container}>
+          {this.renderHeader()}
+          <ScrollView style={styles.main}>
+            <Text style={styles.nabeName}>{nabeInfo.name}セット</Text>
+            {this.renderPeopleNum()}
+            <View style={styles.listItemContainer}>
+              <Text style={styles.listItemName}>{"食材"}</Text>
+            </View>
+            {nabeInfo.food.map(item => this.renderItem(item))}
+            {this.renderDate()}
+            <View style={styles.listItemContainer}>
+              <Text style={styles.listItemName}>お届け先住所</Text>
+            </View>
+          </ScrollView>
+          {this.renderFooter()}
+        </View>
+        <Modal isVisible={true} style={styles.bottomModal} />
+      </SafeAreaView>
     );
   }
 }
@@ -174,6 +182,7 @@ export default connect(
 )(OrderScreen);
 
 const list_item_side_margin = 4;
+const headerBackGroundColor = "white";
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -182,7 +191,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFFFFF"
   },
   main: {
-    flex: 0.85,
     padding: 16
   },
   imageStyle: {
@@ -197,9 +205,11 @@ const styles = StyleSheet.create({
     fontWeight: "bold"
   },
   footer: {
-    flex: 0.15,
+    height: 60,
     width: Dimensions.get("window").width,
-    backgroundColor: "#FF813A"
+    backgroundColor: "#FF813A",
+    paddingLeft: 30,
+    paddingRight: 30
   },
   footerContainer: {
     flex: 1,
@@ -242,5 +252,13 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#fff"
+  },
+  safeAreaStyle: {
+    flex: 1,
+    backgroundColor: headerBackGroundColor
+  },
+  bottomModal: {
+    justifyContent: "flex-end",
+    margin: 0
   }
 });
