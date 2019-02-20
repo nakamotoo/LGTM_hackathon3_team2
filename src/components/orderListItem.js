@@ -13,97 +13,41 @@ import * as actions from "../actions";
 import { Actions } from "react-native-router-flux";
 import Icon from "react-native-vector-icons/FontAwesome";
 import DatePicker from "react-native-datepicker";
-import OrderListItem from "./orderListItem";
 
-class OrderScreen extends Component {
+class OrderListItem extends Component {
   state = {
-    nabeId: this.props.selectedNabe.item.key,
-    peopleNum: 2,
-    finalAmount: [],
-    date: null
+    changeNum: 0
   };
 
   componentWillMount() {}
 
-  setDate = newDate => {
-    this.setState({ chosenDate: newDate });
-  };
-
-  renderPeopleNum = () => {
-    const { peopleNum } = this.state;
+  render() {
+    const { peopleNum, item } = this.props;
+    const { changeNum } = this.state;
+    const integer = Math.ceil(item.amount * peopleNum) + changeNum;
 
     return (
       <View style={styles.listItemContainer}>
-        <Text style={styles.listItemName}>{"人数"}</Text>
+        <Text style={styles.listItemName}>{item.name}</Text>
         <View style={styles.listItemWrapper}>
           <View style={styles.digitButton}>
             <TouchableOpacity
               onPress={() =>
-                peopleNum > 1 && this.setState({ peopleNum: peopleNum - 1 })
+                integer > 0 && this.setState({ changeNum: changeNum - 1 })
               }
             >
               <Icon name="minus" size={12} color={"red"} />
             </TouchableOpacity>
           </View>
-          <Text style={styles.listItemAmount}>{String(peopleNum)}</Text>
+          <Text style={styles.listItemAmount}>{String(integer)}</Text>
           <View style={styles.digitButton}>
             <TouchableOpacity
-              onPress={() => this.setState({ peopleNum: peopleNum + 1 })}
+              onPress={() => this.setState({ changeNum: changeNum + 1 })}
             >
               <Icon name="plus" size={12} color={"red"} />
             </TouchableOpacity>
           </View>
         </View>
-      </View>
-    );
-  };
-
-  renderDate = () => {
-    return (
-      <View style={styles.listItemContainer}>
-        <Text style={styles.listItemName}>お届け日時</Text>
-        <DatePicker
-          style={{ flex: 1 }}
-          date={this.state.date}
-          mode="datetime"
-          placeholder="希望のお届け日時を選択"
-          showIcon={false}
-          format="LLL"
-          minDate="2019-02-21"
-          maxDate="2019-03-21"
-          confirmBtnText="完了"
-          cancelBtnText="キャンセル"
-          customStyles={{
-            dateInput: {
-              flex: 1,
-              borderWidth: 0
-            },
-            placeholderText: {
-              color: "#777"
-            }
-          }}
-          onDateChange={date => {
-            this.setState({ date: date });
-          }}
-        />
-      </View>
-    );
-  };
-
-  renderItem = item => {
-    const { peopleNum } = this.state;
-    return <OrderListItem item={item} peopleNum={peopleNum} key={item.id} />;
-  };
-
-  render() {
-    const { nabeId } = this.state;
-    return (
-      <View style={styles.container}>
-        <ScrollView style={{ flex: 1 }}>
-          {this.renderPeopleNum()}
-          {this.renderDate()}
-          {this.props.nabe[nabeId - 1].food.map(item => this.renderItem(item))}
-        </ScrollView>
       </View>
     );
   }
@@ -119,7 +63,7 @@ const mapStateToProps = state => {
 export default connect(
   mapStateToProps,
   actions
-)(OrderScreen);
+)(OrderListItem);
 
 const list_item_side_margin = 4;
 const styles = StyleSheet.create({
