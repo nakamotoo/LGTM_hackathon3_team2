@@ -37,7 +37,7 @@ class OrderListItem extends Component {
                 this.props.changeFoodNum(
                   this.state.changeNum,
                   item.id,
-                  pepleNum
+                  peopleNum
                 );
               }}
             >

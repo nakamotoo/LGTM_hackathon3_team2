@@ -1,11 +1,11 @@
 import * as actionType from "./types";
 
-export const changeFoodNum = (num, foodId, pepleNum) => {
+export const changeFoodNum = (num, foodId, peopleNum) => {
   return {
     type: actionType.CHANGE_FOOD_NUM,
     num,
     foodId,
-    pepleNum
+    peopleNum
   };
 };
 
@@ -16,5 +16,17 @@ export const selectNabe = (nabeId, peopleNum, nabeInfo, material) => {
     peopleNum,
     nabeInfo,
     material
+  };
+};
+
+export const increasePeopleNum = () => {
+  return {
+    type: actionType.INCREASE_PEOPLE_NUM
+  };
+};
+
+export const decreasePeopleNum = () => {
+  return {
+    type: actionType.DECREASE_PEOPLE_NUM
   };
 };

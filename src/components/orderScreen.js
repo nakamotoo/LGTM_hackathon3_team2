@@ -44,9 +44,10 @@ class OrderScreen extends Component {
         <View style={styles.listItemWrapper}>
           <View style={styles.digitButton}>
             <TouchableOpacity
-              onPress={() =>
-                peopleNum > 1 && this.setState({ peopleNum: peopleNum - 1 })
-              }
+              onPress={() => {
+                peopleNum > 1 && this.setState({ peopleNum: peopleNum - 1 });
+                this.props.decreasePeopleNum();
+              }}
             >
               <Icon name="minus" size={12} color={"red"} />
             </TouchableOpacity>
@@ -54,7 +55,10 @@ class OrderScreen extends Component {
           <Text style={styles.listItemAmount}>{String(peopleNum)}</Text>
           <View style={styles.digitButton}>
             <TouchableOpacity
-              onPress={() => this.setState({ peopleNum: peopleNum + 1 })}
+              onPress={() => {
+                this.setState({ peopleNum: peopleNum + 1 });
+                this.props.increasePeopleNum();
+              }}
             >
               <Icon name="plus" size={12} color={"red"} />
             </TouchableOpacity>
