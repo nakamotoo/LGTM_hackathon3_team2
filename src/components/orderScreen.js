@@ -101,7 +101,8 @@ class OrderScreen extends Component {
           customStyles={{
             dateInput: {
               flex: 1,
-              borderWidth: 0
+              borderWidth: 0,
+              alignItems: "flex-end"
             },
             placeholderText: {
               color: "#777"
@@ -169,6 +170,7 @@ class OrderScreen extends Component {
             {this.renderDate()}
             <View style={styles.listItemContainer}>
               <Text style={styles.listItemName}>お届け先住所</Text>
+              <Text>東京都文京区根津２丁目...</Text>
             </View>
           </ScrollView>
           {this.renderFooter()}
