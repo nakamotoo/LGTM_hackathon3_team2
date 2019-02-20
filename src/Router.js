@@ -14,7 +14,7 @@ class RouterComponent extends Component {
             component={MainComponent}
             hideNavBar={true}
           />
-          <Scene key="orderScreen" component={OrderScreen} />
+          <Scene key="orderScreen" component={OrderScreen} title="注文画面" />
         </Scene>
       </Router>
     );
