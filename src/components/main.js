@@ -30,7 +30,7 @@ class MainContainer extends Component {
         </TouchableOpacity>
         <View style={styles.textContainer}>
           <Text style={styles.listTitle}>{selectedNabe.item.name}</Text>
-          <Text style={styles.te}>{selectedNabe.item.price}</Text>
+          <Text style={styles.listInfo}>{selectedNabe.item.price}</Text>
         </View>
       </View>
     );
