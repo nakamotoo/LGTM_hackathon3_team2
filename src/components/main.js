@@ -36,9 +36,9 @@ class MainContainer extends Component {
     );
   };
   header = name => {
-    let sentence = `みんなで${name}パ!`;
+    let sentence = `みんなで${name}パ！`;
     if (name == "レシピ") {
-      sentence = `実は簡単パーティレシピ!`;
+      sentence = `実は簡単パーティレシピ！`;
     }
     return (
       <View style={styles.header}>
@@ -55,7 +55,7 @@ class MainContainer extends Component {
         <View style={styles.container}>
           <ScrollView>
             <View style={{ flexDirection: "row", flex: 1 }}>
-              {this.header("鍋")}
+              {this.header("ナベ")}
               <Image
                 style={{
                   width: 120,
@@ -214,7 +214,7 @@ const styles = StyleSheet.create({
   },
   partyTitle: {
     fontSize: 20,
-    fontWeight: "400",
+    fontWeight: "bold",
     color: "#49444f"
   },
   imageStyle: {
