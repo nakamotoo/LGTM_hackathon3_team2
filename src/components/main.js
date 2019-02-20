@@ -15,7 +15,7 @@ import { connect } from "react-redux";
 import * as actions from "../actions";
 import { Actions } from "react-native-router-flux";
 import SafeAreaView from "react-native-safe-area-view";
-import modal from "./orderDone.js";
+import Modal from "./orderDone.js";
 
 class MainContainer extends Component {
   state = { isModalVisible: false };
@@ -59,6 +59,7 @@ class MainContainer extends Component {
             onPress={() => {
               this.setState({ isModalVisible: true });
             }}
+            style={{ width: 200, height: 50, backgroundColor: "orange" }}
           />
           <Modal isModalVisible={this.state.isModalVisible} />
           <ScrollView>
