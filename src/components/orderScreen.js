@@ -35,6 +35,15 @@ class OrderScreen extends Component {
     this.setState({ chosenDate: newDate });
   };
 
+  priceCalculation = () => {
+    const { order } = this.props;
+    let price = 0;
+    order.food.forEach(f => {
+      price += (Math.ceil(f.amount * order.people) + f.changeNum) * f.priceper1;
+    });
+    return price;
+  };
+
   renderPeopleNum = () => {
     const { peopleNum } = this.state;
 
@@ -105,15 +114,24 @@ class OrderScreen extends Component {
     return <OrderListItem item={item} peopleNum={peopleNum} key={item.id} />;
   };
 
+  renderFooter = () => {
+    return (
+      <View style={styles.footer}>
+        <Text>合計金額(税込) : {this.priceCalculation()}</Text>
+      </View>
+    );
+  };
+
   render() {
     const { nabeId, nabeInfo } = this.state;
     return (
       <View style={styles.container}>
-        <ScrollView style={{ flex: 1 }}>
+        <ScrollView style={styles.main}>
           {this.renderPeopleNum()}
           {this.renderDate()}
           {nabeInfo.food.map(item => this.renderItem(item))}
         </ScrollView>
+        {this.renderFooter()}
       </View>
     );
   }
@@ -122,7 +140,8 @@ class OrderScreen extends Component {
 const mapStateToProps = state => {
   return {
     nabe: state.nabe,
-    material: state.material
+    material: state.material,
+    order: state.order
   };
 };
 
@@ -138,6 +157,14 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#FFFFFF"
+  },
+  main: {
+    flex: 0.85
+  },
+  footer: {
+    flex: 0.15,
+    borderTopWidth: 1,
+    width: Dimensions.get("window").width
   },
   listItemContainer: {
     width: Dimensions.get("window").width,

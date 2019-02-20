@@ -9,11 +9,13 @@ const INITIAL_STATE = {
 
 let tmpPrice = 0;
 
+let restFoodPrice = 0;
+
 const food = (state = {}, action) => {
   switch (action.type) {
     case actionType.SELECT_NABE:
       const food = action.material.food.filter(f => f.foodId == state.id);
-      tmpPrice += food[0].value * state.amount * action.peopleNum;
+      tmpPrice += food[0].value * Math.ceil(state.amount * action.peopleNum);
       return { ...state, priceper1: food[0].value, changeNum: 0 };
       break;
     case actionType.INCREASE_FOOD_NUM:
