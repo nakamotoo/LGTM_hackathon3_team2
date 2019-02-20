@@ -32,9 +32,14 @@ class OrderListItem extends Component {
         <View style={styles.listItemWrapper}>
           <View style={styles.digitButton}>
             <TouchableOpacity
-              onPress={() =>
-                integer > 0 && this.setState({ changeNum: changeNum - 1 })
-              }
+              onPress={() => {
+                integer > 0 && this.setState({ changeNum: changeNum - 1 });
+                this.props.changeFoodNum(
+                  this.state.changeNum,
+                  item.id,
+                  pepleNum
+                );
+              }}
             >
               <Icon name="minus" size={12} color={"red"} />
             </TouchableOpacity>

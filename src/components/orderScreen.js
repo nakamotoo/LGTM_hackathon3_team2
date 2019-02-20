@@ -17,13 +17,19 @@ import OrderListItem from "./orderListItem";
 
 class OrderScreen extends Component {
   state = {
+    nabeInfo: null,
     nabeId: this.props.selectedNabe.item.key,
     peopleNum: 2,
     finalAmount: [],
     date: null
   };
 
-  componentWillMount() {}
+  componentWillMount() {
+    const { nabeId, peopleNum } = this.state;
+    this.setState({ nabeInfo: this.props.nabe[nabeId - 1] });
+    const nabeInfo = this.props.nabe[nabeId - 1];
+    this.props.selectNabe(nabeId, peopleNum, nabeInfo, this.props.material);
+  }
 
   setDate = newDate => {
     this.setState({ chosenDate: newDate });
@@ -96,13 +102,13 @@ class OrderScreen extends Component {
   };
 
   render() {
-    const { nabeId } = this.state;
+    const { nabeId, nabeInfo } = this.state;
     return (
       <View style={styles.container}>
         <ScrollView style={{ flex: 1 }}>
           {this.renderPeopleNum()}
           {this.renderDate()}
-          {this.props.nabe[nabeId - 1].food.map(item => this.renderItem(item))}
+          {nabeInfo.food.map(item => this.renderItem(item))}
         </ScrollView>
       </View>
     );
