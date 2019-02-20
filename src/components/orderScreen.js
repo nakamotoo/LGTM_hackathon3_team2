@@ -23,7 +23,8 @@ class OrderScreen extends Component {
     nabeInfo: null,
     nabeId: this.props.selectedNabe.item.key,
     peopleNum: 2,
-    date: null
+    date: null,
+    isVisible: false
   };
 
   componentWillMount() {
@@ -134,7 +135,12 @@ class OrderScreen extends Component {
   renderFooter = () => {
     return (
       <View style={styles.footer}>
-        <TouchableOpacity style={styles.footerContainer}>
+        <TouchableOpacity
+          style={styles.footerContainer}
+          onPress={() => {
+            this.setState({ isVisible: !this.state.isVisible });
+          }}
+        >
           <Text style={styles.orderText}>注文へ</Text>
           <Text style={styles.orderPrice}>¥ {this.priceCalculation()}</Text>
         </TouchableOpacity>
@@ -161,8 +167,18 @@ class OrderScreen extends Component {
             </View>
           </ScrollView>
           {this.renderFooter()}
+          <Modal isVisible={this.state.isVisible} style={styles.bottomModal}>
+            <View
+              style={{
+                height: 100,
+                width: Dimensions.get("window").width,
+                backgroundColor: "#ffffff"
+              }}
+            >
+              <Text>注文</Text>
+            </View>
+          </Modal>
         </View>
-        <Modal isVisible={true} style={styles.bottomModal} />
       </SafeAreaView>
     );
   }
