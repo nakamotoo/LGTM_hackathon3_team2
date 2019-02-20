@@ -144,6 +144,16 @@ class OrderScreen extends Component {
           <Text style={styles.orderText}>注文へ</Text>
           <Text style={styles.orderPrice}>¥ {this.priceCalculation()}</Text>
         </TouchableOpacity>
+        <Modal isVisible={true} style={styles.bottomModal}>
+          <View
+            style={{
+              height: 100,
+              backgroundColor: "#ffffff"
+            }}
+          >
+            <Text>注文</Text>
+          </View>
+        </Modal>
       </View>
     );
   };
@@ -167,17 +177,6 @@ class OrderScreen extends Component {
             </View>
           </ScrollView>
           {this.renderFooter()}
-          <Modal isVisible={this.state.isVisible} style={styles.bottomModal}>
-            <View
-              style={{
-                height: 100,
-                width: Dimensions.get("window").width,
-                backgroundColor: "#ffffff"
-              }}
-            >
-              <Text>注文</Text>
-            </View>
-          </Modal>
         </View>
       </SafeAreaView>
     );
@@ -275,6 +274,6 @@ const styles = StyleSheet.create({
   },
   bottomModal: {
     justifyContent: "flex-end",
-    margin: 0
+    marginBottom: 0
   }
 });
