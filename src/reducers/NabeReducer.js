@@ -14,7 +14,7 @@ const hinabe = {
     { id: 6, name: "ddd", amount: 0.4 },
     { id: 7, name: "めん", amount: 0.4 }
   ],
-  price:"700円/人"
+  price: "700円/人"
 };
 
 const paitan = {
@@ -30,7 +30,7 @@ const paitan = {
     { id: 6, name: "ddd", amount: 0.4 },
     { id: 7, name: "めん", amount: 0.4 }
   ],
-  price:"600円/人"
+  price: "600円/人"
 };
 
 const motsunabe = {
@@ -46,7 +46,7 @@ const motsunabe = {
     { id: 6, name: "ddd", amount: 0.4 },
     { id: 7, name: "めん", amount: 0.4 }
   ],
-  price:"700円/人"
+  price: "700円/人"
 };
 
 const gekikara = {
@@ -63,7 +63,7 @@ const gekikara = {
     { id: 6, name: "ddd", amount: 0.4 },
     { id: 7, name: "めん", amount: 0.4 }
   ],
-  price:"600円/人"
+  price: "600円/人"
 };
 
 const tonyu = {
@@ -79,7 +79,7 @@ const tonyu = {
     { id: 6, name: "ddd", amount: 0.4 },
     { id: 7, name: "めん", amount: 0.4 }
   ],
-  price:"600円/人"
+  price: "600円/人"
 };
 
 const kimuchi = {
@@ -96,7 +96,7 @@ const kimuchi = {
     { id: 6, name: "ddd", amount: 0.4 },
     { id: 7, name: "めん", amount: 0.4 }
   ],
-  price:"500円/人"
+  price: "500円/人"
 };
 
 const INITIAL_STATE = [hinabe, paitan, motsunabe, gekikara, tonyu, kimuchi];

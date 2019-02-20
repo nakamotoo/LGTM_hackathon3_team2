@@ -35,33 +35,123 @@ class MainContainer extends Component {
       </View>
     );
   };
-  header = () => {
+  header = name => {
+    let sentence = `みんなで${name}パ!`;
+    if (name == "レシピ") {
+      sentence = `実は簡単パーティレシピ!`;
+    }
     return (
       <View style={styles.header}>
-        <Text style={styles.partyTitle}>みんなで鍋パ！</Text>
+        <Text style={styles.partyTitle}>{sentence}</Text>
       </View>
     );
+    // }
   };
   render() {
-    const { nabe } = this.props;
+    const { nabe, takoyaki, okonomiyaki, recipe } = this.props;
+    console.log(okonomiyaki);
     return (
       <SafeAreaView style={styles.safeAreaStyle} forceInset={{ top: "always" }}>
-        <View style={styles.overlay}>
-          <ScrollView horizontal={true}>
-            {this.header()}
-            <FlatList
-              data={nabe.map(item => {
-                return {
-                  key: item.nabeId,
-                  name: item.name,
-                  image: item.image,
-                  price: item.price
-                };
-              })}
-              contentContainerStyle={styles.flatListContainer}
-              numColumns={10}
-              renderItem={this.renderItem}
-            />
+        <View style={styles.container}>
+          <ScrollView>
+            <View style={{ flexDirection: "row", flex: 1 }}>
+              {this.header("鍋")}
+              <Image
+                style={{
+                  width: 120,
+                  height: 30,
+                  position: "absolute",
+                  right: 4,
+                  top: 0
+                }}
+                resizeMode={"contain"}
+                source={require("../images/icon.png")}
+              />
+            </View>
+            <ScrollView
+              horizontal={true}
+              showsHorizontalScrollIndicator={false}
+              automaticallyAdjustContentInsets={false}
+            >
+              <FlatList
+                data={nabe.map(item => {
+                  return {
+                    key: item.nabeId,
+                    name: item.name,
+                    image: item.image,
+                    price: item.price
+                  };
+                })}
+                scrollEnabled={false}
+                contentContainerStyle={styles.flatListContainer}
+                numColumns={10}
+                renderItem={this.renderItem}
+              />
+            </ScrollView>
+            {this.header("たこ")}
+
+            <ScrollView
+              horizontal={true}
+              showsHorizontalScrollIndicator={false}
+              automaticallyAdjustContentInsets={false}
+            >
+              <FlatList
+                data={takoyaki.map(item => {
+                  return {
+                    key: item.id,
+                    name: item.name,
+                    image: item.image,
+                    price: item.price
+                  };
+                })}
+                scrollEnabled={false}
+                contentContainerStyle={styles.flatListContainer}
+                numColumns={10}
+                renderItem={this.renderItem}
+              />
+            </ScrollView>
+            {this.header("お好み焼き")}
+            <ScrollView
+              horizontal={true}
+              showsHorizontalScrollIndicator={false}
+              automaticallyAdjustContentInsets={false}
+            >
+              <FlatList
+                data={okonomiyaki.map(item => {
+                  return {
+                    key: item.id,
+                    name: item.name,
+                    image: item.image,
+                    price: item.price
+                  };
+                })}
+                scrollEnabled={false}
+                contentContainerStyle={styles.flatListContainer}
+                numColumns={10}
+                renderItem={this.renderItem}
+              />
+            </ScrollView>
+            {this.header("レシピ")}
+            <ScrollView
+              horizontal={true}
+              showsHorizontalScrollIndicator={false}
+              automaticallyAdjustContentInsets={false}
+            >
+              <FlatList
+                data={recipe.map(item => {
+                  return {
+                    key: item.id,
+                    name: item.name,
+                    image: item.image,
+                    price: item.price
+                  };
+                })}
+                scrollEnabled={false}
+                contentContainerStyle={styles.flatListContainer}
+                numColumns={10}
+                renderItem={this.renderItem}
+              />
+            </ScrollView>
           </ScrollView>
         </View>
       </SafeAreaView>
@@ -70,7 +160,12 @@ class MainContainer extends Component {
 }
 
 const mapStateToProps = state => {
-  return { nabe: state.nabe };
+  return {
+    nabe: state.nabe,
+    takoyaki: state.takoyaki,
+    okonomiyaki: state.okonomiyaki,
+    recipe: state.recipe
+  };
 };
 
 export default connect(
@@ -91,7 +186,8 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "white"
+    backgroundColor: "white",
+    marginTop: 12
   },
   safeAreaStyle: {
     flex: 1,
@@ -140,7 +236,7 @@ const styles = StyleSheet.create({
     marginTop: 8
   },
   header: {
-    marginLeft: primary_side_margin,
+    marginLeft: primary_side_margin + 8,
     backgroundColor: headerBackGroundColor
   },
   headerText: {
