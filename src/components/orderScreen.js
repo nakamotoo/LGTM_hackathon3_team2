@@ -39,7 +39,8 @@ class OrderScreen extends Component {
     const { order } = this.props;
     let price = 0;
     order.food.forEach(f => {
-      price += (Math.ceil(f.amount * order.people) + f.changeNum) * f.priceper1;
+      price +=
+        (Math.ceil(f.amount * order.people) + f.changeNum) * f.priceper1 + 500;
     });
     return price;
   };
@@ -131,7 +132,10 @@ class OrderScreen extends Component {
   renderFooter = () => {
     return (
       <View style={styles.footer}>
-        <Text>合計金額(税込) : {this.priceCalculation()}</Text>
+        <TouchableOpacity style={styles.footerContainer}>
+          <Text style={styles.orderText}>注文へ</Text>
+          <Text style={styles.orderPrice}> ¥{this.priceCalculation()}</Text>
+        </TouchableOpacity>
       </View>
     );
   };
@@ -194,9 +198,17 @@ const styles = StyleSheet.create({
   },
   footer: {
     flex: 0.15,
-    borderTopWidth: 1,
-    width: Dimensions.get("window").width
+    width: Dimensions.get("window").width,
+    backgroundColor: "#FF813A"
   },
+  footerContainer: {
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center"
+  },
+  orderText: { fontSize: 28, color: "#ffffff", fontWeight: "bold" },
+  orderPrice: { fontSize: 24, color: "#ffffff", fontWeight: "bold" },
   listItemContainer: {
     width: Dimensions.get("window").width - 16 * 2,
     flex: 1,
