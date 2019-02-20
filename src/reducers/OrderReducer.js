@@ -13,11 +13,20 @@ const food = (state = {}, action) => {
   switch (action.type) {
     case actionType.SELECT_NABE:
       const food = action.material.food.filter(f => f.foodId == state.id);
-      console.log(food[0]);
-      console.log(action.peopleNum);
       tmpPrice += food[0].value * state.amount * action.peopleNum;
-      console.log(tmpPrice);
-      return { ...state, priceper1: food[0].value };
+      return { ...state, priceper1: food[0].value, changeNum: 0 };
+      break;
+    case actionType.INCREASE_FOOD_NUM:
+      if (action.id == state.id) {
+        return { ...state, changeNum: state.changeNum + 1 };
+        break;
+      }
+    case actionType.DECREASE_FOOD_NUM:
+      console.log(state);
+      if (action.id == state.id && state.changeNum >= 1) {
+        return { ...state, changeNum: state.changeNum - 1 };
+        break;
+      }
     default:
       return state;
   }
@@ -38,6 +47,16 @@ export default (state = INITIAL_STATE, action) => {
     case actionType.DECREASE_PEOPLE_NUM:
       const num = state.people > 1 ? state.people - 1 : state.people;
       return { ...state, people: num };
+    case actionType.INCREASE_FOOD_NUM:
+      return {
+        ...state,
+        food: state.food.map(item => food(item, action))
+      };
+    case actionType.DECREASE_FOOD_NUM:
+      return {
+        ...state,
+        food: state.food.map(item => food(item, action))
+      };
     default:
       return state;
   }
