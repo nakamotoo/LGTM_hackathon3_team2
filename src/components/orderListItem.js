@@ -78,16 +78,12 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFFFFF"
   },
   listItemContainer: {
-    width: Dimensions.get("window").width,
+    width: Dimensions.get("window").width - 16 * 2,
     flex: 1,
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    height: 44,
-    borderBottomWidth: 0.5,
-    borderColor: "#555",
-    paddingLeft: list_item_side_margin,
-    paddingRight: list_item_side_margin
+    height: 36
   },
   listItemName: {},
   listItemAmount: { width: 45, textAlign: "center" },

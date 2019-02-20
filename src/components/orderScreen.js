@@ -6,7 +6,8 @@ import {
   StyleSheet,
   ScrollView,
   Dimensions,
-  TouchableOpacity
+  TouchableOpacity,
+  Image
 } from "react-native";
 import { connect } from "react-redux";
 import * as actions from "../actions";
@@ -20,7 +21,6 @@ class OrderScreen extends Component {
     nabeInfo: null,
     nabeId: this.props.selectedNabe.item.key,
     peopleNum: 2,
-    finalAmount: [],
     date: null
   };
 
@@ -114,6 +114,20 @@ class OrderScreen extends Component {
     return <OrderListItem item={item} peopleNum={peopleNum} key={item.id} />;
   };
 
+  renderHeader = () => {
+    const { nabeInfo } = this.state;
+    return (
+      <View>
+        <Image
+          style={styles.imageStyle}
+          source={{
+            uri: nabeInfo.image
+          }}
+        />
+      </View>
+    );
+  };
+
   renderFooter = () => {
     return (
       <View style={styles.footer}>
@@ -126,10 +140,15 @@ class OrderScreen extends Component {
     const { nabeId, nabeInfo } = this.state;
     return (
       <View style={styles.container}>
+        {this.renderHeader()}
         <ScrollView style={styles.main}>
+          <Text style={styles.nabeName}>{nabeInfo.name}セット</Text>
           {this.renderPeopleNum()}
-          {this.renderDate()}
+          <View style={styles.listItemContainer}>
+            <Text style={styles.listItemName}>{"食材"}</Text>
+          </View>
           {nabeInfo.food.map(item => this.renderItem(item))}
+          {this.renderDate()}
         </ScrollView>
         {this.renderFooter()}
       </View>
@@ -159,7 +178,19 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFFFFF"
   },
   main: {
-    flex: 0.85
+    flex: 0.85,
+    padding: 16
+  },
+  imageStyle: {
+    height: 110,
+    width: Dimensions.get("window").width
+  },
+  nabeName: {
+    fontSize: 24,
+    width: Dimensions.get("window").width,
+    textAlign: "center",
+    paddingBottom: 8,
+    fontWeight: "bold"
   },
   footer: {
     flex: 0.15,
@@ -167,19 +198,26 @@ const styles = StyleSheet.create({
     width: Dimensions.get("window").width
   },
   listItemContainer: {
-    width: Dimensions.get("window").width,
+    width: Dimensions.get("window").width - 16 * 2,
     flex: 1,
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    height: 44,
-    borderBottomWidth: 0.5,
-    borderColor: "#555",
-    paddingLeft: list_item_side_margin,
-    paddingRight: list_item_side_margin
+    height: 40,
+    borderBottomWidth: 3,
+    borderColor: "#dadada"
   },
-  listItemName: {},
-  listItemAmount: { width: 45, textAlign: "center" },
+  listItemName: {
+    paddingTop: 6,
+    fontSize: 18,
+    fontWeight: "bold"
+  },
+  listItemAmount: {
+    width: 45,
+    textAlign: "center",
+    fontSize: 18,
+    fontWeight: "bold"
+  },
   listItemWrapper: {
     flexDirection: "row"
   },
