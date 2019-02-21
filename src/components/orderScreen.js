@@ -154,7 +154,10 @@ class OrderScreen extends Component {
   render() {
     const { nabeId, nabeInfo } = this.state;
     return (
-      <SafeAreaView style={styles.safeAreaStyle} forceInset={{ top: "never" }}>
+      <SafeAreaView
+        style={styles.safeAreaStyle}
+        forceInset={{ top: "never", bottom: "always" }}
+      >
         <View style={styles.container}>
           {this.renderHeader()}
           <ScrollView style={styles.main}>
